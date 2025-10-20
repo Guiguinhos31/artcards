@@ -4,8 +4,50 @@ import random
 from datetime import datetime
 import time
 
+import streamlit as st
+import pandas as pd
+import requests
+
+# --- Ici, tu colles la fonction ---
+def verifier_images(csv_path):
+    """Vérifie les URLs d’images dans le CSV et affiche un rapport dans Streamlit"""
+    st.header("🔍 Vérification des images")
+    try:
+        cards = pd.read_csv(csv_path, encoding="utf-8")
+    except Exception as e:
+        st.error(f"❌ Erreur de lecture du CSV : {e}")
+        return
+
+    cards.columns = cards.columns.str.strip()
+    cards["URL Image"] = cards["URL Image"].astype(str).str.strip()
+
+    erreurs = []
+
+    for i, row in cards.iterrows():
+        url = row["URL Image"]
+        nom = row["Nom de l’œuvre"]
+
+        try:
+            r = requests.head(url, timeout=5)
+            if r.status_code != 200:
+                erreurs.append((nom, url, r.status_code))
+        except Exception as e:
+            erreurs.append((nom, url, str(e)))
+
+    if not erreurs:
+        st.success("✅ Toutes les images sont accessibles !")
+    else:
+        st.warning(f"⚠️ {len(erreurs)} image(s) posent problème :")
+        for nom, url, code in erreurs:
+            st.write(f"- **{nom}** → {url} (erreur : {code})")
+        st.info("💡 Vérifie qu’il n’y a pas d’espace ou de retour à la ligne dans les URLs.")
+
+
 # --- Charger les cartes ---
 cards = pd.read_csv("cartes50.csv")  # Assure-toi que URL Image contient les liens Wikipedia
+
+verifier_images("cartes50.csv")
+
 
 # --- Initialiser session state ---
 if "collection" not in st.session_state:
@@ -92,5 +134,6 @@ for theme in theme_list:
     for idx, (_, card) in enumerate(missing.iterrows()):
         col = cols[idx % 5]
         col.image("https://via.placeholder.com/100?text=??", width=100, caption="Carte manquante")
+
 
 
