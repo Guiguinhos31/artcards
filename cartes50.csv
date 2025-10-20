@@ -1,8 +1,8 @@
 ,ID,Nom de l’œuvre,Artiste,Période / Thème,Rareté,URL Image,Description / Anecdote,Pack disponible,Notes
 ,1,La Joconde,Léonard de Vinci,Renaissance,Légendaire,https://upload.wikimedia.org/wikipedia/commons/6/6a/Mona_Lisa.jpg,Portrait célèbre du Louvre,Thématique & Mystère,Carte spéciale
-,2,David,Michel-Ange,Renaissance,Épique,https://upload.wikimedia.org/wikipedia/commons/e/ea/Michelangelo%27s_David_2015.jpg,Statue emblématique,Thématique & Mystère,-
-,3,La Création d’Adam,Michel-Ange,Renaissance,Épique,https://upload.wikimedia.org/wikipedia/commons/5/5e/Michelangelo_-_Creation_of_Adam_%28cropped%29.jpg,Fresque de la Chapelle Sixtine,Thématique & Mystère,-
-,4,L’Homme de Vitruve,Léonard de Vinci,Renaissance,Rare,https://upload.wikimedia.org/wikipedia/commons/3/3f/Da_Vinci_Vitruve_Luc_Viatour.jpg,Dessin anatomique,Thématique,-
+,2,David,Michel-Ange,Renaissance,Épique,https://upload.wikimedia.org/wikipedia/commons/b/bb/%27David%27_by_Michelangelo_Fir_JBU004.jpg,Statue emblématique,Thématique & Mystère,-
+,3,La Création d’Adam,Michel-Ange,Renaissance,Épique,https://upload.wikimedia.org/wikipedia/commons/e/e0/Creaci%C3%B3n_de_Ad%C3%A1n.jpg,Fresque de la Chapelle Sixtine,Thématique & Mystère,-
+,4,L’Homme de Vitruve,Léonard de Vinci,Renaissance,Rare,https://upload.wikimedia.org/wikipedia/commons/f/f1/Vitruvian_Man_by_Leonardo_da_Vinci.jpg,Dessin anatomique,Thématique,-
 ,5,La Nuit étoilée,Vincent Van Gogh,Post-Impressionnisme,Rare,https://upload.wikimedia.org/wikipedia/commons/e/ea/Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg,Célèbre peinture nocturne,Thématique & Mystère,-
 ,6,Les Nymphéas,Claude Monet,Impressionnisme,Rare,https://upload.wikimedia.org/wikipedia/commons/5/57/Claude_Monet_-_Water_Lilies_-_Google_Art_Project.jpg,Série de tableaux sur les nénuphars,Thématique,-
 ,7,Girl with a Pearl Earring,Johannes Vermeer,Baroque,Rare,https://upload.wikimedia.org/wikipedia/commons/d/d7/Meisje_met_de_parel.jpg,Portrait célèbre,Thématique,-
@@ -50,4 +50,5 @@
 ,49,L’Angélus,Jean-François Millet,Réalisme,Rare,https://upload.wikimedia.org/wikipedia/commons/3/36/Jean-François_Millet_-_L%27Angélus.jpg,Scène paysanne,Thématique,-
 
 ,50,Le Jardin secret,Claude Monet,Impressionnisme,Rare,https://upload.wikimedia.org/wikipedia/commons/4/42/Claude_Monet_-_Impression_soleil_levant.jpg,Thématique,Peinture paysagère,-
+
 
