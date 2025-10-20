@@ -51,9 +51,6 @@ if st.button("Vérifier les images"):
 # --- Charger les cartes ---
 cards = pd.read_csv("cartes50.csv")  # Assure-toi que URL Image contient les liens Wikipedia
 
-verifier_images("cartes50.csv")
-
-
 # --- Initialiser session state ---
 if "collection" not in st.session_state:
     st.session_state.collection = []
@@ -139,6 +136,7 @@ for theme in theme_list:
     for idx, (_, card) in enumerate(missing.iterrows()):
         col = cols[idx % 5]
         col.image("https://via.placeholder.com/100?text=??", width=100, caption="Carte manquante")
+
 
 
 
