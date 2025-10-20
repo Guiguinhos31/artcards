@@ -14,13 +14,13 @@
 ,13,Composition VIII,Wassily Kandinsky,Abstraction,Épique,https://upload.wikimedia.org/wikipedia/commons/4/47/Vassily_Kandinsky%2C_1923_-_Composition_8%2C_huile_sur_toile%2C_140_cm_x_201_cm%2C_Mus%C3%A9e_Guggenheim%2C_New_York.jpg?uselang=fr,Art abstrait,Thématique,-
 ,14,La Danse,Henri Matisse,Fauvisme,Rare,https://upload.wikimedia.org/wikipedia/commons/d/d6/La_Danse_I%2C_par_Henri_Matisse.jpg,Oeuvre colorée,Thématique,-
 ,15,Le Jardin des délices,Hieronymus Bosch,Renaissance,Épique,https://upload.wikimedia.org/wikipedia/commons/1/1e/El_jard%C3%ADn_de_las_delicias.jpg,Triptyque célèbre,Thématique & Mystère,-
-,16,L’Origine du monde,Gustave Courbet,Réalisme,Rare,https://upload.wikimedia.org/wikipedia/commons/4/45/Gustave_Courbet_-_L%27Origine_du_monde.jpg,Oeuvre controversée,Thématique,-
-,17,La Grande Vague,Hokusai,Ukiyo-e,Rare,https://upload.wikimedia.org/wikipedia/commons/0/0a/Great_Wave_off_Kanagawa2.jpg,Gravure japonaise célèbre,Thématique,-
-,18,Les Demoiselles d’Avignon,Pablo Picasso,Cubisme,Épique,https://upload.wikimedia.org/wikipedia/en/d/d7/Les_Demoiselles_d%27Avignon.jpg,Peinture cubiste majeure,Thématique & Mystère,-
-,19,La Liberté guidant le peuple,Eugène Delacroix,Romantisme,Épique,https://upload.wikimedia.org/wikipedia/commons/0/0d/Eug%C3%A8ne_Delacroix_-_La_Libert%C3%A9_guidant_le_peuple.jpg,Oeuvre emblématique française,Thématique,-
-,20,Impression soleil levant,Claude Monet,Impressionnisme,Rare,https://upload.wikimedia.org/wikipedia/commons/4/42/Claude_Monet%2C_Impression%2C_soleil_levant.jpg,Peinture qui a donné le nom à l’impressionnisme,Thématique,-
-,21,Le Déjeuner sur l’herbe,Édouard Manet,Réalisme,Rare,https://upload.wikimedia.org/wikipedia/commons/0/0c/Edouard_Manet_-_Le_Dejeuner_sur_l%27herbe.jpg,Peinture scandaleuse,Thématique,-
-,22,Olympia,Édouard Manet,Réalisme,Épique,https://upload.wikimedia.org/wikipedia/commons/e/e2/Edouard_Manet_-_Olympia.jpg,Portrait provocateur,Thématique & Mystère,-
+,16,L’Origine du monde,Gustave Courbet,Réalisme,Rare,https://fr.wikipedia.org/wiki/L%27Origine_du_monde#/media/Fichier:Origin-of-the-World.jpg,Oeuvre controversée,Thématique,-
+,17,La Grande Vague,Hokusai,Ukiyo-e,Rare,https://fr.wikipedia.org/wiki/La_Grande_Vague_de_Kanagawa#/media/Fichier:Tsunami_by_hokusai_19th_century.jpg,Gravure japonaise célèbre,Thématique,-
+,18,Les Demoiselles d’Avignon,Pablo Picasso,Cubisme,Épique,https://www.wikiart.org/fr/pablo-picasso/les-demoiselles-davignon-1907,Peinture cubiste majeure,Thématique & Mystère,-
+,19,La Liberté guidant le peuple,Eugène Delacroix,Romantisme,Épique,https://fr.wikipedia.org/wiki/La_Libert%C3%A9_guidant_le_peuple#/media/Fichier:La_Libert%C3%A9_guidant_le_peuple_-_Eug%C3%A8ne_Delacroix_-_Mus%C3%A9e_du_Louvre_Peintures_RF_129_-_apr%C3%A8s_restauration_2024.jpg,Oeuvre emblématique française,Thématique,-
+,20,Impression soleil levant,Claude Monet,Impressionnisme,Rare,https://fr.wikipedia.org/wiki/Impression,_soleil_levant#/media/Fichier:Claude_Monet,_Impression,_soleil_levant.jpg,Peinture qui a donné le nom à l’impressionnisme,Thématique,-
+,21,Le Déjeuner sur l’herbe,Édouard Manet,Réalisme,Rare,https://fr.wikipedia.org/wiki/Le_D%C3%A9jeuner_sur_l%27herbe#/media/Fichier:%C3%89douard_Manet_-_Le_D%C3%A9jeuner_sur_l'herbe.jpg,Peinture scandaleuse,Thématique,-
+,22,Olympia,Édouard Manet,Réalisme,Épique,https://fr.wikipedia.org/wiki/Olympia_(Manet)#/media/Fichier:Edouard_Manet_-_Olympia_-_Google_Art_Project_2.jpg,Portrait provocateur,Thématique & Mystère,-
 ,23,Les Raboteurs de parquet,Gustave Caillebotte,Impressionnisme,Rare,https://upload.wikimedia.org/wikipedia/commons/f/f2/Gustave_Caillebotte_-_Les_Raboteurs_de_parquet.jpg,Scène réaliste,Thématique,-
 ,24,Le Fils de l’homme,René Magritte,Surréalisme,Épique,https://upload.wikimedia.org/wikipedia/en/d/dd/Magritte_TheSonOfMan.jpg,Oeuvre emblématique surréaliste,Thématique & Mystère,-
 ,25,La Ronde,Käthe Kollwitz,Expressionnisme,Rare,https://upload.wikimedia.org/wikipedia/commons/3/37/Kollwitz_Ronde.jpg,Oeuvre dramatique,Thématique,-
@@ -50,6 +50,7 @@
 ,49,L’Angélus,Jean-François Millet,Réalisme,Rare,https://upload.wikimedia.org/wikipedia/commons/3/36/Jean-François_Millet_-_L%27Angélus.jpg,Scène paysanne,Thématique,-
 
 ,50,Le Jardin secret,Claude Monet,Impressionnisme,Rare,https://upload.wikimedia.org/wikipedia/commons/4/42/Claude_Monet_-_Impression_soleil_levant.jpg,Thématique,Peinture paysagère,-
+
 
 
 
