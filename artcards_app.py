@@ -54,6 +54,9 @@ for theme in theme_list:
     owned = theme_cards[theme_cards["ID"].isin(st.session_state.collection)]
     missing = theme_cards[~theme_cards["ID"].isin(st.session_state.collection)]
     
+    # Nombre de cartes possédées
+    st.write(f"Cartes possédées : {len(owned)}/{len(theme_cards)}")
+    
     # Barre de progression
     progress = len(owned) / len(theme_cards)
     st.progress(progress)
