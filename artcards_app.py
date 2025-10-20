@@ -4,6 +4,8 @@ import random
 from datetime import datetime
 import time
 
+st.image("https://upload.wikimedia.org/wikipedia/commons/3/3b/Vincent_van_Gogh_-_Sunflowers_-_VGM_F458.jpg", caption="Les Tournesols")
+
 # --- Charger les cartes ---
 cards = pd.read_csv("cartes50.csv")  # Assure-toi que URL Image contient les liens Wikipedia
 
@@ -92,3 +94,4 @@ for theme in theme_list:
     for idx, (_, card) in enumerate(missing.iterrows()):
         col = cols[idx % 5]
         col.image("https://via.placeholder.com/100?text=??", width=100, caption="Carte manquante")
+
