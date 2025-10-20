@@ -12,18 +12,18 @@ import streamlit as st
 st.markdown("---")
 st.subheader("🖼️ Vérifier les images des cartes")
 
-# Bouton pour lancer la vérification
 if st.button("Vérifier les images"):
     try:
         # Lecture du CSV
-        df = pd.read_csv("artcards.csv")
+        df = pd.read_csv("cartes50.csv")
 
         errors = []
         headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}
 
-        # Test de chaque lien
+        # Vérifie chaque lien d'image
         with st.spinner("Vérification en cours..."):
             for i, row in df.iterrows():
+                # Colonne du lien image — vérifie bien qu’elle s’appelle exactement comme ça :
                 url = row["URL Image"]
                 name = row["Nom de l’œuvre"]
 
@@ -36,14 +36,14 @@ if st.button("Vérifier les images"):
 
         # Résultat
         if not errors:
-            st.success("✅ Toutes les images sont accessibles et fonctionnelles !")
+            st.success("✅ Toutes les images de cartes50.csv sont accessibles et fonctionnelles !")
         else:
             st.error(f"{len(errors)} erreur(s) détectée(s) :")
             for err in errors:
                 st.write(err)
 
     except FileNotFoundError:
-        st.error("⚠️ Fichier artcards.csv introuvable. Vérifie son emplacement.")
+        st.error("⚠️ Fichier cartes50.csv introuvable. Vérifie son emplacement dans le même dossier que ton script.")
     except Exception as e:
         st.error(f"Erreur inattendue : {e}")
 
@@ -139,6 +139,7 @@ for theme in theme_list:
     for idx, (_, card) in enumerate(missing.iterrows()):
         col = cols[idx % 5]
         col.image("https://via.placeholder.com/100?text=??", width=100, caption="Carte manquante")
+
 
 
 
