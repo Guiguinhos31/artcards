@@ -30,11 +30,7 @@ def page_packs(cards):
         placeholder = st.empty()
 
         # 1️⃣ Pack fermé centré
-        placeholder.markdown(f"""
-        <div style="display:flex; flex-direction:column; justify-content:center; align-items:center; margin:50px auto;">
-            <img src="pack_ferme.png" width="400" style="border-radius:12px;">
-        </div>
-        """, unsafe_allow_html=True)
+        placeholder.image("pack_ferme.png", width=400)
         time.sleep(1.5)
         placeholder.empty()
         time.sleep(0.3)
