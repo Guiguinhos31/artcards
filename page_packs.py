@@ -39,10 +39,11 @@ def page_packs(cards):
 
     # --- Choix du pack ---
     theme_list = cards["Période / Thème"].unique()
-    # Ajouter "Aléatoire" en option
     theme_list_with_random = ["Aléatoire"] + list(theme_list)
     chosen_theme = st.selectbox("🎨 Choisis ton pack du jour :", theme_list_with_random)
 
+    # --- Initialiser pack_cards pour éviter UnboundLocalError ---
+    pack_cards = None
 
     # --- Bouton pour ouvrir le pack du jour ---
     if st.button("Ouvrir le pack", use_container_width=True):
@@ -53,10 +54,10 @@ def page_packs(cards):
             theme_cards = cards[cards["Période / Thème"] == chosen_theme]
             n_samples = min(5, len(theme_cards))
             pack_cards = theme_cards.sample(n_samples)
-        
-    st.subheader(f"📦 Pack {chosen_theme} ouvert !")
-    open_pack(pack_cards)
 
+        if pack_cards is not None:
+            st.subheader(f"📦 Pack {chosen_theme} ouvert !")
+            open_pack(pack_cards)
 
     # --- Pack mystère toutes les 7 connexions ---
     if st.session_state.days_connected % 7 == 0:
