@@ -3,7 +3,7 @@ import pandas as pd
 
 from page_packs import page_packs
 from page_collection import page_collection 
-# from page_defis import page_defis
+from page_defis import page_defis
 
 # --- Configuration de base ---
 st.set_page_config(page_title="ArtCards", page_icon="🎨", layout="wide")
@@ -37,5 +37,6 @@ if page == "📦 Ouverture de packs":
 elif page == "🎴 Collection":
     page_collection(cards) 
 elif page == "🏆 Défis":
-    st.info("Page défis à venir... 🏆")
+    page_defis(cards)
+
 
