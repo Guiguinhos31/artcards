@@ -1,5 +1,4 @@
 import streamlit as st
-import pandas as pd
 import time
 from datetime import datetime
 
@@ -42,13 +41,17 @@ def page_packs(cards):
     theme_list = cards["Période / Thème"].unique()
     chosen_theme = st.selectbox("🎨 Choisis ton pack du jour :", theme_list)
 
+    # --- Bouton pour ouvrir le pack du jour ---
     if st.button("Ouvrir le pack", use_container_width=True):
-        pack_cards = cards[cards["Période / Thème"] == chosen_theme].sample(5)
+        theme_cards = cards[cards["Période / Thème"] == chosen_theme]
+        n_samples = min(5, len(theme_cards))  # Evite l'erreur si moins de 5 cartes
+        pack_cards = theme_cards.sample(n_samples)
         st.subheader(f"📦 Pack {chosen_theme} ouvert !")
         open_pack(pack_cards)
 
     # --- Pack mystère toutes les 7 connexions ---
     if st.session_state.days_connected % 7 == 0:
         st.success("🎁 Pack mystère débloqué !")
-        mystery_cards = cards.sample(5)
+        n_samples_mystery = min(5, len(cards))
+        mystery_cards = cards.sample(n_samples_mystery)
         open_pack(mystery_cards)
