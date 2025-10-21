@@ -25,19 +25,17 @@ def page_packs(cards):
     if "last_pack_date" not in st.session_state:
         st.session_state.last_pack_date = None
 
-    # --- Fonction d'ouverture d'un pack avec effet cinématique ---
+    # --- Fonction d'ouverture d'un pack avec effet cinématique et zoom/fade-in ---
     def open_pack(pack_cards):
         placeholder = st.empty()
 
-        # 1️⃣ Afficher le pack fermé en grand
+        # 1️⃣ Pack fermé en grand
         placeholder.image("pack_ferme.png", width=400)
-        time.sleep(1.5)  # Pack visible un moment
-
-        # 2️⃣ Supprimer le pack fermé
+        time.sleep(1.5)
         placeholder.empty()
-        time.sleep(0.3)  # Petite pause pour l'effet transition
+        time.sleep(0.3)
 
-        # 3️⃣ Afficher les cartes une par une, centrées et grandes
+        # 2️⃣ Cartes qui apparaissent une par une, centrées et grandes avec effet zoom/fade-in
         for _, card in pack_cards.iterrows():
             if card["ID"] not in st.session_state.collection:
                 st.session_state.collection.append(card["ID"])
@@ -52,17 +50,25 @@ def page_packs(cards):
                 align-items:center; 
                 justify-content:center; 
                 text-align:center;
-                margin:30px auto;">
+                margin:30px auto;
+                opacity:0;
+                transform: scale(0.8);
+                transition: all 0.6s ease-in-out;">
                 <img src="{card['URL Image']}" width="350" style="border: 4px solid {color}; border-radius:12px;">
                 <p style="color:{color}; font-size:18px; margin-top:10px;">
                     {star} {card['Nom de l’œuvre']} ({card['Rareté']}) - {card['Artiste']}
                 </p>
             </div>
+            <script>
+                const cardDiv = window.document.querySelector('div:last-of-type');
+                cardDiv.style.opacity = 1;
+                cardDiv.style.transform = 'scale(1)';
+            </script>
             """, unsafe_allow_html=True)
 
-            time.sleep(0.8)  # Délai pour simuler l'ouverture progressive
+            time.sleep(0.8)  # Délai pour l’effet d’ouverture progressive
 
-        # 4️⃣ Mise à jour pour les défis
+        # 3️⃣ Mise à jour pour les défis
         st.session_state.last_pack_opened = True
         st.session_state.last_pack_cards = pack_cards.to_dict('records')
 
