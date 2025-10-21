@@ -37,6 +37,10 @@ def page_packs(cards):
             """, unsafe_allow_html=True)
             time.sleep(0.6)
 
+        # --- Mise à jour session_state pour la page Défis ---
+        st.session_state.last_pack_opened = True
+        st.session_state.last_pack_cards = pack_cards.to_dict('records')
+
     # --- Choix du pack ---
     theme_list = cards["Période / Thème"].unique()
     theme_list_with_random = ["Aléatoire"] + list(theme_list)
