@@ -25,17 +25,16 @@ def page_packs(cards):
     if "last_pack_date" not in st.session_state:
         st.session_state.last_pack_date = None
 
-    # --- Fonction d'ouverture d'un pack avec effet CSS fade-in/zoom ---
+    # --- Fonction d'ouverture d'un pack ---
     def open_pack(pack_cards):
-        placeholder = st.empty()
-
         # 1️⃣ Pack fermé en grand
+        placeholder = st.empty()
         placeholder.image("pack_ferme.png", width=400)
         time.sleep(1.5)
         placeholder.empty()
         time.sleep(0.3)
 
-        # 2️⃣ Cartes qui apparaissent une par une
+        # 2️⃣ Cartes qui apparaissent une par une dans leur propre container
         for _, card in pack_cards.iterrows():
             if card["ID"] not in st.session_state.collection:
                 st.session_state.collection.append(card["ID"])
@@ -43,28 +42,29 @@ def page_packs(cards):
             color = rarity_colors.get(card["Rareté"], "black")
             star = "✨" if card["Rareté"] in ["Rare", "Légendaire"] else ""
 
-            placeholder.markdown(f"""
-            <div style="
-                display:flex;
-                flex-direction:column;
-                align-items:center;
-                justify-content:center;
-                text-align:center;
-                margin:30px auto;
-                animation: fadeInZoom 0.6s forwards;">
-                <img src="{card['URL Image']}" width="350" style="border: 4px solid {color}; border-radius:12px;">
-                <p style="color:{color}; font-size:18px; margin-top:10px;">
-                    {star} {card['Nom de l’œuvre']} ({card['Rareté']}) - {card['Artiste']}
-                </p>
-            </div>
+            with st.container():
+                st.markdown(f"""
+                <div style="
+                    display:flex;
+                    flex-direction:column;
+                    align-items:center;
+                    justify-content:center;
+                    text-align:center;
+                    margin:30px auto;
+                    animation: fadeInZoom 0.6s forwards;">
+                    <img src="{card['URL Image']}" width="350" style="border: 4px solid {color}; border-radius:12px;">
+                    <p style="color:{color}; font-size:18px; margin-top:10px;">
+                        {star} {card['Nom de l’œuvre']} ({card['Rareté']}) - {card['Artiste']}
+                    </p>
+                </div>
 
-            <style>
-            @keyframes fadeInZoom {{
-                0% {{opacity:0; transform: scale(0.8);}}
-                100% {{opacity:1; transform: scale(1);}}
-            }}
-            </style>
-            """, unsafe_allow_html=True)
+                <style>
+                @keyframes fadeInZoom {{
+                    0% {{opacity:0; transform: scale(0.8);}}
+                    100% {{opacity:1; transform: scale(1);}}
+                }}
+                </style>
+                """, unsafe_allow_html=True)
 
             time.sleep(0.8)  # Délai pour l’effet d’ouverture progressive
 
@@ -77,12 +77,10 @@ def page_packs(cards):
     theme_list_with_random = ["Aléatoire"] + list(theme_list)
     chosen_theme = st.selectbox("🎨 Choisis ton pack du jour :", theme_list_with_random)
 
-    # --- Initialiser pack_cards pour éviter UnboundLocalError ---
-    pack_cards = None
+    pack_cards = None  # initialisation pour éviter UnboundLocalError
 
     # --- Bouton pour ouvrir le pack du jour ---
     if st.button("Ouvrir le pack", use_container_width=True):
-        # Vérifier si le pack a déjà été ouvert aujourd'hui
         if st.session_state.get("last_pack_date", None) == today_date:
             st.markdown(f"""
             <div style="
