@@ -42,9 +42,19 @@ def page_packs(cards):
             star = "✨" if card["Rareté"] in ["Rare", "Légendaire"] else ""
 
             placeholder.markdown(f"""
-            <div style='border:2px solid {color}; padding:10px; text-align:center; margin:10px auto; border-radius:12px; width:80%; max-width:300px; transition: transform 0.5s;'>
-                <img src="{card['URL Image']}" width="200" style="transform: scale(1.1);">
-                <b style='color:{color}; font-size:18px;'>{star} {card['Nom de l’œuvre']} ({card['Rareté']}) - {card['Artiste']}</b>
+            <div style="
+                border:2px solid {color}; 
+                padding:10px; 
+                text-align:center; 
+                margin:10px auto; 
+                border-radius:12px; 
+                width:80%; 
+                max-width:300px;
+                box-sizing: border-box;">
+                <img src="{card['URL Image']}" width="200" style="display:block; margin:auto;">
+                <p style='color:{color}; font-size:16px; margin-top:8px; margin-bottom:0;'>
+                    {star} {card['Nom de l’œuvre']} ({card['Rareté']}) - {card['Artiste']}
+                </p>
             </div>
             """, unsafe_allow_html=True)
 
