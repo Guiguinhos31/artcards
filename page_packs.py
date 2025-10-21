@@ -14,12 +14,16 @@ def page_packs(cards):
     }
 
     # --- Mise à jour du compteur de jours ---
-    today = datetime.today().date()
-    if st.session_state.last_day != today:
+    today_date = datetime.today().date()
+    if st.session_state.last_day != today_date:
         st.session_state.days_connected += 1
-        st.session_state.last_day = today
+        st.session_state.last_day = today_date
 
     st.markdown(f"<p style='text-align:center;'>Jours de connexion : <b>{st.session_state.days_connected}</b></p>", unsafe_allow_html=True)
+
+    # --- Initialiser session_state pour le suivi pack ---
+    if "last_pack_date" not in st.session_state:
+        st.session_state.last_pack_date = None
 
     # --- Fonction d'ouverture d'un pack ---
     def open_pack(pack_cards):
@@ -51,17 +55,22 @@ def page_packs(cards):
 
     # --- Bouton pour ouvrir le pack du jour ---
     if st.button("Ouvrir le pack", use_container_width=True):
-        if chosen_theme == "Aléatoire":
-            n_samples = min(5, len(cards))
-            pack_cards = cards.sample(n_samples)
+        # Vérifier si le pack a déjà été ouvert aujourd'hui
+        if st.session_state.get("last_pack_date", None) == today_date:
+            st.warning("⛔ Tu as déjà ouvert un pack aujourd'hui ! Reviens demain pour en ouvrir un nouveau.")
         else:
-            theme_cards = cards[cards["Période / Thème"] == chosen_theme]
-            n_samples = min(5, len(theme_cards))
-            pack_cards = theme_cards.sample(n_samples)
+            if chosen_theme == "Aléatoire":
+                n_samples = min(5, len(cards))
+                pack_cards = cards.sample(n_samples)
+            else:
+                theme_cards = cards[cards["Période / Thème"] == chosen_theme]
+                n_samples = min(5, len(theme_cards))
+                pack_cards = theme_cards.sample(n_samples)
 
-        if pack_cards is not None:
-            st.subheader(f"📦 Pack {chosen_theme} ouvert !")
-            open_pack(pack_cards)
+            if pack_cards is not None:
+                st.subheader(f"📦 Pack {chosen_theme} ouvert !")
+                open_pack(pack_cards)
+                st.session_state.last_pack_date = today_date
 
     # --- Pack mystère toutes les 7 connexions ---
     if st.session_state.days_connected % 7 == 0:
