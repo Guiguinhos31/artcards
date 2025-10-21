@@ -25,7 +25,7 @@ def page_packs(cards):
     if "last_pack_date" not in st.session_state:
         st.session_state.last_pack_date = None
 
-    # --- Fonction d'ouverture d'un pack avec effet cinématique et zoom/fade-in ---
+    # --- Fonction d'ouverture d'un pack avec effet CSS fade-in/zoom ---
     def open_pack(pack_cards):
         placeholder = st.empty()
 
@@ -35,7 +35,7 @@ def page_packs(cards):
         placeholder.empty()
         time.sleep(0.3)
 
-        # 2️⃣ Cartes qui apparaissent une par une, centrées et grandes avec effet zoom/fade-in
+        # 2️⃣ Cartes qui apparaissent une par une
         for _, card in pack_cards.iterrows():
             if card["ID"] not in st.session_state.collection:
                 st.session_state.collection.append(card["ID"])
@@ -45,25 +45,25 @@ def page_packs(cards):
 
             placeholder.markdown(f"""
             <div style="
-                display:flex; 
-                flex-direction:column; 
-                align-items:center; 
-                justify-content:center; 
+                display:flex;
+                flex-direction:column;
+                align-items:center;
+                justify-content:center;
                 text-align:center;
                 margin:30px auto;
-                opacity:0;
-                transform: scale(0.8);
-                transition: all 0.6s ease-in-out;">
+                animation: fadeInZoom 0.6s forwards;">
                 <img src="{card['URL Image']}" width="350" style="border: 4px solid {color}; border-radius:12px;">
                 <p style="color:{color}; font-size:18px; margin-top:10px;">
                     {star} {card['Nom de l’œuvre']} ({card['Rareté']}) - {card['Artiste']}
                 </p>
             </div>
-            <script>
-                const cardDiv = window.document.querySelector('div:last-of-type');
-                cardDiv.style.opacity = 1;
-                cardDiv.style.transform = 'scale(1)';
-            </script>
+
+            <style>
+            @keyframes fadeInZoom {{
+                0% {{opacity:0; transform: scale(0.8);}}
+                100% {{opacity:1; transform: scale(1);}}
+            }}
+            </style>
             """, unsafe_allow_html=True)
 
             time.sleep(0.8)  # Délai pour l’effet d’ouverture progressive
