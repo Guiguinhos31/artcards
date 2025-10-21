@@ -90,10 +90,8 @@ elif page == "📚 Ma collection":
         st.write(f"Cartes possédées : {len(owned)}/{len(theme_cards)}")
         st.progress(len(owned)/len(theme_cards))
         
-        # On crée 5 colonnes pour afficher les cartes
         cols = st.columns(5)
-        
-        # Fonction pour afficher une carte (possédée ou manquante)
+
         def display_card(col, card=None, owned=False):
             if owned:
                 star = "✨" if card["Rareté"] in ["Rare", "Légendaire"] else ""
@@ -101,19 +99,22 @@ elif page == "📚 Ma collection":
                 color = rarity_colors.get(card["Rareté"], "black")
                 col.markdown(f"""
                 <div style='border:{border}; padding:5px; text-align:center;'>
-                    <img src="{card['URL Image']}" width="100"><br>
-                    <b style='color:{color};'>{star} {card['Nom de l’œuvre']} ({card['Rareté']})</b>
+                    <img src="{card['URL Image']}" width="100" 
+                        style="display:block; margin:auto; border-radius:8px;"><br>
+                    <b style='color:{color}; font-size:12px;'>{star} {card['Nom de l’œuvre']} ({card['Rareté']})</b>
                 </div>
                 """, unsafe_allow_html=True)
             else:
-                # Carte manquante : placeholder uniforme
+                # Carte manquante : carré gris, pas d'image chargée
                 col.markdown(f"""
-                <div style='border:2px dashed gray; padding:5px; text-align:center;'>
-                    <img src="https://via.placeholder.com/100?text=??" width="100"><br>
-                    <span style='color:gray;'>Carte manquante</span>
+                <div style='border:2px dashed gray; padding:20px; text-align:center;
+                            width:100px; height:140px; display:flex; flex-direction:column;
+                            justify-content:center; align-items:center; border-radius:8px; background-color:#f0f0f0;'>
+                    <span style='font-size:22px; color:gray;'>??</span>
+                    <span style='font-size:11px; color:gray;'>Carte manquante</span>
                 </div>
                 """, unsafe_allow_html=True)
-        
+
         # Affichage des cartes possédées
         for idx, (_, card) in enumerate(owned.iterrows()):
             col = cols[idx % 5]
@@ -122,7 +123,7 @@ elif page == "📚 Ma collection":
         # Affichage des cartes manquantes
         for idx, (_, card) in enumerate(missing.iterrows()):
             col = cols[idx % 5]
-            display_card(col, card=card, owned=False)
+            display_card(col, owned=False)
 
 # ------------------- PAGE 3 : Défis -------------------
 elif page == "🏆 Défis":
@@ -133,4 +134,5 @@ elif page == "🏆 Défis":
     - Défis créatifs 💡  
     - Mini-jeux autour des cartes 📦  
     """)
+
 
