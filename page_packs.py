@@ -26,9 +26,13 @@ def page_packs(cards):
         st.session_state.last_pack_date = None
 
     def open_pack(pack_cards):
+        placeholder = st.empty()
+
         # Pack fermé centré
-        st.image("pack_ferme.png", width=400)
+        placeholder.image("pack_ferme.png", width=400)
         time.sleep(1.5)
+        placeholder.empty()
+        time.sleep(0.3)
 
         # Cartes qui apparaissent une par une
         for _, card in pack_cards.iterrows():
@@ -38,13 +42,19 @@ def page_packs(cards):
             color = rarity_colors.get(card["Rareté"], "black")
             star = "✨" if card["Rareté"] in ["Rare", "Légendaire"] else ""
 
-            caption = f"{star} {card['Nom de l’œuvre']} ({card['Rareté']}) - {card['Artiste']}"
-            st.image(card['URL Image'], width=350, caption=caption)
+            # Carte + texte ensemble
+            placeholder.markdown(f"""
+            <div style="display:flex; flex-direction:column; justify-content:center; align-items:center; margin:50px auto;">
+                <img src="{card['URL Image']}" width="350" style="border:4px solid {color}; border-radius:12px;">
+                <div style="color:{color}; font-size:18px; margin-top:10px;">
+                    {star} {card['Nom de l’œuvre']} ({card['Rareté']}) - {card['Artiste']}
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
 
-            time.sleep(1.2)  # visible 1.2 secondes
-            st.empty()  # disparaît avant la suivante
+            time.sleep(1.0)  # visible 1 seconde
+            placeholder.empty()  # disparaît avant la suivante
 
-        # Mise à jour pour les défis
         st.session_state.last_pack_opened = True
         st.session_state.last_pack_cards = pack_cards.to_dict('records')
 
