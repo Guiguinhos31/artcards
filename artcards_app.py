@@ -2,8 +2,7 @@ import streamlit as st
 import pandas as pd
 
 from page_packs import page_packs
-# On ajoutera plus tard :
-# from page_collection import page_collection
+from page_collection import page_collection 
 # from page_defis import page_defis
 
 # --- Configuration de base ---
@@ -36,6 +35,7 @@ page = st.sidebar.radio(
 if page == "📦 Ouverture de packs":
     page_packs(cards)
 elif page == "🎴 Collection":
-    st.info("Page collection en construction... 🎴")
+    page_collection(cards) 
 elif page == "🏆 Défis":
     st.info("Page défis à venir... 🏆")
+
