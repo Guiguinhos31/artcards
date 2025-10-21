@@ -43,7 +43,7 @@ def page_packs(cards):
             color = rarity_colors.get(card["Rareté"], "black")
             star = "✨" if card["Rareté"] in ["Rare", "Légendaire"] else ""
 
-            # Affichage de la carte avec fade-in puis fade-out via CSS
+            # Affichage de la carte dans le placeholder unique
             placeholder.markdown(f"""
             <div style="
                 display:flex;
@@ -52,7 +52,7 @@ def page_packs(cards):
                 justify-content:center;
                 text-align:center;
                 margin:30px auto;
-                animation: fadeInZoom 0.6s forwards, fadeOut 0.3s 0.8s forwards;">
+                animation: fadeInZoom 0.6s forwards;">
                 <img src="{card['URL Image']}" width="350" style="border:4px solid {color}; border-radius:12px;">
                 <p style="color:{color}; font-size:18px; margin-top:10px;">
                     {star} {card['Nom de l’œuvre']} ({card['Rareté']}) - {card['Artiste']}
@@ -64,14 +64,11 @@ def page_packs(cards):
                 0% {{opacity:0; transform: scale(0.8);}}
                 100% {{opacity:1; transform: scale(1);}}
             }}
-            @keyframes fadeOut {{
-                0% {{opacity:1;}}
-                100% {{opacity:0;}}
-            }}
             </style>
             """, unsafe_allow_html=True)
 
-            time.sleep(1.2)  # temps total = fadeIn + fadeOut
+            time.sleep(1.0)  # pause pour que l’utilisateur voie la carte
+            placeholder.empty()  # disparaît avant la suivante
 
         # 3️⃣ Mise à jour pour les défis
         st.session_state.last_pack_opened = True
