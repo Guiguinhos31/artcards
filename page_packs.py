@@ -39,15 +39,24 @@ def page_packs(cards):
 
     # --- Choix du pack ---
     theme_list = cards["Période / Thème"].unique()
-    chosen_theme = st.selectbox("🎨 Choisis ton pack du jour :", theme_list)
+    # Ajouter "Aléatoire" en option
+    theme_list_with_random = ["Aléatoire"] + list(theme_list)
+    chosen_theme = st.selectbox("🎨 Choisis ton pack du jour :", theme_list_with_random)
+
 
     # --- Bouton pour ouvrir le pack du jour ---
     if st.button("Ouvrir le pack", use_container_width=True):
-        theme_cards = cards[cards["Période / Thème"] == chosen_theme]
-        n_samples = min(5, len(theme_cards))  # Evite l'erreur si moins de 5 cartes
-        pack_cards = theme_cards.sample(n_samples)
-        st.subheader(f"📦 Pack {chosen_theme} ouvert !")
-        open_pack(pack_cards)
+        if chosen_theme == "Aléatoire":
+            n_samples = min(5, len(cards))
+            pack_cards = cards.sample(n_samples)
+        else:
+            theme_cards = cards[cards["Période / Thème"] == chosen_theme]
+            n_samples = min(5, len(theme_cards))
+            pack_cards = theme_cards.sample(n_samples)
+        
+    st.subheader(f"📦 Pack {chosen_theme} ouvert !")
+    open_pack(pack_cards)
+
 
     # --- Pack mystère toutes les 7 connexions ---
     if st.session_state.days_connected % 7 == 0:
