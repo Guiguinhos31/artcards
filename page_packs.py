@@ -27,14 +27,15 @@ def page_packs(cards):
 
     # --- Fonction d'ouverture d'un pack ---
     def open_pack(pack_cards):
-        # 1️⃣ Pack fermé en grand
         placeholder = st.empty()
+
+        # 1️⃣ Pack fermé en grand
         placeholder.image("pack_ferme.png", width=400)
         time.sleep(1.5)
         placeholder.empty()
         time.sleep(0.3)
 
-        # 2️⃣ Cartes qui apparaissent une par une dans leur propre container
+        # 2️⃣ Cartes qui apparaissent une par une avec disparition avant la suivante
         for _, card in pack_cards.iterrows():
             if card["ID"] not in st.session_state.collection:
                 st.session_state.collection.append(card["ID"])
@@ -42,31 +43,32 @@ def page_packs(cards):
             color = rarity_colors.get(card["Rareté"], "black")
             star = "✨" if card["Rareté"] in ["Rare", "Légendaire"] else ""
 
-            with st.container():
-                st.markdown(f"""
-                <div style="
-                    display:flex;
-                    flex-direction:column;
-                    align-items:center;
-                    justify-content:center;
-                    text-align:center;
-                    margin:30px auto;
-                    animation: fadeInZoom 0.6s forwards;">
-                    <img src="{card['URL Image']}" width="350" style="border: 4px solid {color}; border-radius:12px;">
-                    <p style="color:{color}; font-size:18px; margin-top:10px;">
-                        {star} {card['Nom de l’œuvre']} ({card['Rareté']}) - {card['Artiste']}
-                    </p>
-                </div>
+            # Affichage dans le placeholder unique
+            placeholder.markdown(f"""
+            <div style="
+                display:flex;
+                flex-direction:column;
+                align-items:center;
+                justify-content:center;
+                text-align:center;
+                margin:30px auto;
+                animation: fadeInZoom 0.6s forwards;">
+                <img src="{card['URL Image']}" width="350" style="border: 4px solid {color}; border-radius:12px;">
+                <p style="color:{color}; font-size:18px; margin-top:10px;">
+                    {star} {card['Nom de l’œuvre']} ({card['Rareté']}) - {card['Artiste']}
+                </p>
+            </div>
 
-                <style>
-                @keyframes fadeInZoom {{
-                    0% {{opacity:0; transform: scale(0.8);}}
-                    100% {{opacity:1; transform: scale(1);}}
-                }}
-                </style>
-                """, unsafe_allow_html=True)
+            <style>
+            @keyframes fadeInZoom {{
+                0% {{opacity:0; transform: scale(0.8);}}
+                100% {{opacity:1; transform: scale(1);}}
+            }}
+            </style>
+            """, unsafe_allow_html=True)
 
-            time.sleep(0.8)  # Délai pour l’effet d’ouverture progressive
+            time.sleep(0.8)
+            placeholder.empty()  # Carte disparaît avant la suivante
 
         # 3️⃣ Mise à jour pour les défis
         st.session_state.last_pack_opened = True
@@ -94,7 +96,6 @@ def page_packs(cards):
                 <h3 style="color:#FF4500;">⛔ Oups !</h3>
                 <p>Tu as déjà ouvert ton pack aujourd'hui.<br>
                 Reviens demain pour découvrir de nouvelles œuvres !</p>
-                <p style="font-size:24px;">🎨✨</p>
             </div>
             """, unsafe_allow_html=True)
         else:
