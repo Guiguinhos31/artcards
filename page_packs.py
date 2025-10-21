@@ -25,15 +25,19 @@ def page_packs(cards):
     if "last_pack_date" not in st.session_state:
         st.session_state.last_pack_date = None
 
-    # --- Fonction d'ouverture d'un pack ---
+    # --- Fonction d'ouverture d'un pack avec effet cinématique ---
     def open_pack(pack_cards):
         placeholder = st.empty()
 
-        # 1️⃣ Afficher le pack fermé
-        placeholder.image("pack_ferme.png", width=250)
-        time.sleep(1)  # délai pour simuler l'ouverture
+        # 1️⃣ Afficher le pack fermé en grand
+        placeholder.image("pack_ferme.png", width=400)
+        time.sleep(1.5)  # Pack visible un moment
 
-        # 2️⃣ Montrer les cartes une par une
+        # 2️⃣ Supprimer le pack fermé
+        placeholder.empty()
+        time.sleep(0.3)  # Petite pause pour l'effet transition
+
+        # 3️⃣ Afficher les cartes une par une, centrées et grandes
         for _, card in pack_cards.iterrows():
             if card["ID"] not in st.session_state.collection:
                 st.session_state.collection.append(card["ID"])
@@ -43,24 +47,22 @@ def page_packs(cards):
 
             placeholder.markdown(f"""
             <div style="
-                border:2px solid {color}; 
-                padding:10px; 
-                text-align:center; 
-                margin:10px auto; 
-                border-radius:12px; 
-                width:80%; 
-                max-width:300px;
-                box-sizing: border-box;">
-                <img src="{card['URL Image']}" width="200" style="display:block; margin:auto;">
-                <p style='color:{color}; font-size:16px; margin-top:8px; margin-bottom:0;'>
+                display:flex; 
+                flex-direction:column; 
+                align-items:center; 
+                justify-content:center; 
+                text-align:center;
+                margin:30px auto;">
+                <img src="{card['URL Image']}" width="350" style="border: 4px solid {color}; border-radius:12px;">
+                <p style="color:{color}; font-size:18px; margin-top:10px;">
                     {star} {card['Nom de l’œuvre']} ({card['Rareté']}) - {card['Artiste']}
                 </p>
             </div>
             """, unsafe_allow_html=True)
 
-            time.sleep(0.7)  # délai pour l'effet “sortie progressive”
+            time.sleep(0.8)  # Délai pour simuler l'ouverture progressive
 
-        # 3️⃣ Mise à jour pour les défis
+        # 4️⃣ Mise à jour pour les défis
         st.session_state.last_pack_opened = True
         st.session_state.last_pack_cards = pack_cards.to_dict('records')
 
