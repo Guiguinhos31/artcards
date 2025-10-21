@@ -57,7 +57,21 @@ def page_packs(cards):
     if st.button("Ouvrir le pack", use_container_width=True):
         # Vérifier si le pack a déjà été ouvert aujourd'hui
         if st.session_state.get("last_pack_date", None) == today_date:
-            st.warning("⛔ Tu as déjà ouvert un pack aujourd'hui ! Reviens demain pour en ouvrir un nouveau.")
+            st.markdown(f"""
+            <div style="
+                border: 2px solid #FF4500; 
+                border-radius: 12px; 
+                background-color: #FFF5F0; 
+                padding: 15px; 
+                text-align:center;
+                max-width:400px; 
+                margin:auto;">
+                <h3 style="color:#FF4500;">⛔ Oups !</h3>
+                <p>Tu as déjà ouvert ton pack aujourd'hui.<br>
+                Reviens demain pour découvrir de nouvelles œuvres !</p>
+                <p style="font-size:24px;">🎨✨</p>
+            </div>
+            """, unsafe_allow_html=True)
         else:
             if chosen_theme == "Aléatoire":
                 n_samples = min(5, len(cards))
