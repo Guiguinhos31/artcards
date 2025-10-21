@@ -35,7 +35,7 @@ def page_packs(cards):
         placeholder.empty()
         time.sleep(0.3)
 
-        # 2️⃣ Cartes qui apparaissent une par une
+        # 2️⃣ Cartes qui apparaissent une par une, texte synchronisé
         for _, card in pack_cards.iterrows():
             if card["ID"] not in st.session_state.collection:
                 st.session_state.collection.append(card["ID"])
@@ -43,18 +43,18 @@ def page_packs(cards):
             color = rarity_colors.get(card["Rareté"], "black")
             star = "✨" if card["Rareté"] in ["Rare", "Légendaire"] else ""
 
-            # Affichage carte + texte
+            # Affichage carte + texte ensemble
             placeholder.markdown(f"""
-            <div style="display:flex; flex-direction:column; align-items:center; text-align:center; margin:30px auto;">
+            <div style="text-align:center; display:inline-block;">
                 <img src="{card['URL Image']}" width="350" style="border:4px solid {color}; border-radius:12px;">
-                <p style="color:{color}; font-size:18px; margin-top:10px;">
+                <div style="color:{color}; font-size:18px; margin-top:10px;">
                     {star} {card['Nom de l’œuvre']} ({card['Rareté']}) - {card['Artiste']}
-                </p>
+                </div>
             </div>
             """, unsafe_allow_html=True)
 
             time.sleep(1.0)  # visible 1 seconde
-            placeholder.empty()  # disparition avant la suivante
+            placeholder.empty()  # disparaît avant la suivante
 
         # 3️⃣ Mise à jour pour les défis
         st.session_state.last_pack_opened = True
