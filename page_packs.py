@@ -28,20 +28,33 @@ def page_packs(cards):
     # --- Fonction d'ouverture d'un pack ---
     def open_pack(pack_cards):
         placeholder = st.empty()
+
+        # 1️⃣ Afficher le pack fermé
+        placeholder.image("pack_ferme.png", width=250)
+        time.sleep(1)  # délai pour simuler l'ouverture
+
+        # 2️⃣ Montrer les cartes une par une
         for _, card in pack_cards.iterrows():
             if card["ID"] not in st.session_state.collection:
                 st.session_state.collection.append(card["ID"])
+
             color = rarity_colors.get(card["Rareté"], "black")
             star = "✨" if card["Rareté"] in ["Rare", "Légendaire"] else ""
+
+            # Effet spécial pour Rare/Légendaire
+            if card["Rareté"] in ["Rare", "Légendaire"]:
+                st.balloons()  # confettis Streamlit
+
             placeholder.markdown(f"""
-            <div style='border:2px solid {color}; padding:10px; text-align:center; margin:10px auto; border-radius:12px; width:80%; max-width:300px;'>
-                <img src="{card['URL Image']}" width="200"><br>
+            <div style='border:2px solid {color}; padding:10px; text-align:center; margin:10px auto; border-radius:12px; width:80%; max-width:300px; transition: transform 0.5s;'>
+                <img src="{card['URL Image']}" width="200" style="transform: scale(1.1);">
                 <b style='color:{color}; font-size:18px;'>{star} {card['Nom de l’œuvre']} ({card['Rareté']}) - {card['Artiste']}</b>
             </div>
             """, unsafe_allow_html=True)
-            time.sleep(0.6)
 
-        # --- Mise à jour session_state pour la page Défis ---
+            time.sleep(0.7)  # délai pour l'effet “sortie progressive”
+
+        # 3️⃣ Mise à jour pour les défis
         st.session_state.last_pack_opened = True
         st.session_state.last_pack_cards = pack_cards.to_dict('records')
 
