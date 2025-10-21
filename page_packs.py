@@ -41,10 +41,6 @@ def page_packs(cards):
             color = rarity_colors.get(card["Rareté"], "black")
             star = "✨" if card["Rareté"] in ["Rare", "Légendaire"] else ""
 
-            # Effet spécial pour Rare/Légendaire
-            if card["Rareté"] in ["Rare", "Légendaire"]:
-                st.balloons()  # confettis Streamlit
-
             placeholder.markdown(f"""
             <div style='border:2px solid {color}; padding:10px; text-align:center; margin:10px auto; border-radius:12px; width:80%; max-width:300px; transition: transform 0.5s;'>
                 <img src="{card['URL Image']}" width="200" style="transform: scale(1.1);">
